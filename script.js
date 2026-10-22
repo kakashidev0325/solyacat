@@ -1,10 +1,10 @@
 document.documentElement.classList.add("js");
 
 const CONFIG = {
-  tokenAddress: "6v2Xpt3Qd3YRBJ5v68E9eRLYqBDKMc5YYwcTpor7pump",
+  tokenAddress: "",
   pumpFunUrl: "",
-  twitter: "https://x.com/solya_x",
-  telegram: "https://t.me/solya_tg",
+  twitter: "https://x.com/solyacatonx",
+  telegram: "https://t.me/solyacat_tg",
 };
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -132,6 +132,12 @@ function initReveal() {
     return;
   }
 
+  document.querySelectorAll("[data-count]").forEach((el) => {
+    const from = Number(el.dataset.from || 0);
+    const suffix = el.dataset.suffix || "";
+    el.textContent = formatCount(from, el.dataset.format === "compact") + suffix;
+  });
+
   items.forEach((el) => {
     const siblings = [...el.parentElement.children].filter((c) => c.hasAttribute("data-reveal"));
     const index = siblings.indexOf(el);
@@ -143,6 +149,7 @@ function initReveal() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("in");
+          entry.target.querySelectorAll("[data-count]").forEach(runCount);
           observer.unobserve(entry.target);
         }
       });
@@ -151,6 +158,95 @@ function initReveal() {
   );
 
   items.forEach((el) => observer.observe(el));
+}
+
+function formatCount(value, compact) {
+  if (!compact) return String(Math.round(value));
+  if (value >= 1e9) return "1B";
+  if (value >= 1e6) return `${Math.round(value / 1e6)}M`;
+  if (value >= 1e3) return `${Math.round(value / 1e3)}K`;
+  return String(Math.round(value));
+}
+
+function runCount(el) {
+  if (el.dataset.counted) return;
+  el.dataset.counted = "1";
+
+  const target = Number(el.dataset.count);
+  const from = Number(el.dataset.from || 0);
+  const suffix = el.dataset.suffix || "";
+  const compact = el.dataset.format === "compact";
+  const duration = 1200;
+  const start = performance.now();
+
+  el.classList.add("pop");
+  el.textContent = formatCount(from, compact) + suffix;
+
+  const tick = (now) => {
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const value = from + (target - from) * eased;
+    el.textContent = formatCount(t === 1 ? target : value, compact) + suffix;
+    if (t < 1) requestAnimationFrame(tick);
+  };
+
+  requestAnimationFrame(tick);
+}
+
+function initSparkles() {
+  const field = document.querySelector(".sparkles");
+  if (!field || reduceMotion) return;
+
+  for (let i = 0; i < 10; i++) {
+    const spark = document.createElement("span");
+    spark.className = "sparkle";
+    const angle = (i / 10) * Math.PI * 2 + 0.3;
+    const radius = 36 + (i % 3) * 5;
+    spark.style.left = `${50 + Math.cos(angle) * radius}%`;
+    spark.style.top = `${50 + Math.sin(angle) * radius}%`;
+    spark.style.setProperty("--s", `${7 + (i % 4) * 3}px`);
+    spark.style.setProperty("--dur", `${1.5 + (i % 5) * 0.35}s`);
+    spark.style.setProperty("--delay", `${-i * 0.27}s`);
+    field.appendChild(spark);
+  }
+}
+
+function initPawTrail() {
+  if (reduceMotion || window.matchMedia("(hover: none)").matches) return;
+
+  let last = 0;
+
+  window.addEventListener("pointermove", (e) => {
+    if (e.pointerType && e.pointerType !== "mouse") return;
+    const now = performance.now();
+    if (now - last < 90) return;
+    last = now;
+
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    use.setAttribute("href", "#paw");
+    svg.appendChild(use);
+    svg.classList.add("trail-paw");
+    svg.style.left = `${e.clientX}px`;
+    svg.style.top = `${e.clientY}px`;
+    svg.style.setProperty("--r", `${Math.random() * 40 - 20}deg`);
+    document.body.appendChild(svg);
+    svg.addEventListener("animationend", () => svg.remove());
+  }, { passive: true });
+}
+
+function initProfileCycle() {
+  const items = [...document.querySelectorAll(".profile-list li")];
+  if (!items.length || reduceMotion) return;
+
+  let index = 0;
+  const mark = () => {
+    items.forEach((el, i) => el.classList.toggle("is-hot", i === index));
+    index = (index + 1) % items.length;
+  };
+
+  mark();
+  setInterval(mark, 1500);
 }
 
 function initCoinTilt() {
@@ -177,6 +273,9 @@ document.addEventListener("DOMContentLoaded", () => {
   initNav();
   initSocialLinks();
   initPaws();
+  initSparkles();
+  initPawTrail();
   initReveal();
+  initProfileCycle();
   initCoinTilt();
 });

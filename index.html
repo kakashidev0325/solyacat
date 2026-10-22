@@ -74,7 +74,7 @@
             Solya is winning hearts across Reddit as a distinguished gentleman—but his iconic pose looks unmistakably like <strong>DOGE</strong>.
           </p>
           <div class="hero-actions intro" style="--d:4">
-            <a href="https://pump.fun/coin/6v2Xpt3Qd3YRBJ5v68E9eRLYqBDKMc5YYwcTpor7pump" data-pumpfun target="_blank" rel="noopener noreferrer" class="btn btn-gold">
+            <a href="https://pump.fun" data-pumpfun target="_blank" rel="noopener noreferrer" class="btn btn-gold">
               <svg class="btn-paw"><use href="#paw" /></svg>
               Buy $SOLYA
             </a>
@@ -87,9 +87,12 @@
             <div class="coin-ring" aria-hidden="true"></div>
             <div class="coin-ring coin-ring--dash" aria-hidden="true"></div>
             <div class="coin">
-              <img src="logo.png" alt="Solya The Cat coin" />
-              <span class="coin-shine" aria-hidden="true"></span>
+              <div class="coin-face">
+                <img src="logo.png" alt="Solya The Cat coin" />
+                <span class="coin-shine" aria-hidden="true"></span>
+              </div>
             </div>
+            <div class="sparkles" aria-hidden="true"></div>
             <div class="orbit" aria-hidden="true">
               <span class="mini-coin">S</span>
             </div>
@@ -124,6 +127,11 @@
 
         <figure class="banner-frame" data-reveal>
           <img src="banner.png" alt="Solya The Cat lying on a golden blanket next to SOLYA coins" />
+          <div class="banner-walk" aria-hidden="true">
+            <svg style="--w:0s"><use href="#paw" /></svg>
+            <svg style="--w:-3.6s"><use href="#paw" /></svg>
+            <svg style="--w:-7.2s"><use href="#paw" /></svg>
+          </div>
         </figure>
 
         <div class="versus">
@@ -149,6 +157,10 @@
         <div class="about-visual" data-reveal>
           <div class="about-blob" aria-hidden="true"></div>
           <img src="logo.png" alt="Solya The Cat" class="about-face" />
+          <span class="glint" style="--d:0s; top:14%; left:16%"></span>
+          <span class="glint" style="--d:0.8s; top:22%; right:12%"></span>
+          <span class="glint" style="--d:1.4s; bottom:18%; left:10%"></span>
+          <span class="glint" style="--d:2.1s; bottom:12%; right:18%"></span>
           <svg class="stamp stamp-a" aria-hidden="true"><use href="#paw" /></svg>
           <svg class="stamp stamp-b" aria-hidden="true"><use href="#paw" /></svg>
         </div>
@@ -158,13 +170,13 @@
           <p class="section-text" data-reveal>
             <strong>Solya The Cat</strong> is a ginger gentleman with impeccable posture, and he's now on Solana as <strong>$SOLYA</strong>.
           </p>
-          <ul class="profile-list" data-reveal>
-            <li><span>Name</span>Solya The Cat</li>
-            <li><span>Ticker</span>$SOLYA</li>
-            <li><span>Famous on</span>Reddit</li>
-            <li><span>Known as</span>A distinguished gentleman</li>
-            <li><span>Signature</span>The DOGE pose</li>
-            <li><span>Chain</span>Solana</li>
+          <ul class="profile-list">
+            <li data-reveal><span>Name</span>Solya The Cat</li>
+            <li data-reveal><span>Ticker</span>$SOLYA</li>
+            <li data-reveal><span>Famous on</span>Reddit</li>
+            <li data-reveal><span>Known as</span>A distinguished gentleman</li>
+            <li data-reveal><span>Signature</span>The DOGE pose</li>
+            <li data-reveal><span>Chain</span>Solana</li>
           </ul>
         </div>
       </div>
@@ -178,7 +190,7 @@
         </header>
         <div class="ca-box" data-reveal>
           <span class="ca-kicker">Solana mint</span>
-          <code id="ca-display" class="ca-address">6v2Xpt3Qd3YRBJ5v68E9eRLYqBDKMc5YYwcTpor7pump</code>
+          <code id="ca-display" class="ca-address">TBA</code>
           <button id="copy-ca" class="btn btn-ghost" type="button" title="Copy address">Copy</button>
         </div>
         <p id="copy-toast" class="copy-toast" role="status" aria-live="polite"></p>
@@ -194,17 +206,17 @@
         </header>
         <div class="token-board">
           <article data-reveal>
-            <p class="token-value">100%</p>
+            <p class="token-value" data-count="100" data-suffix="%">100%</p>
             <h3>Community</h3>
             <p>Zero team allocation.</p>
           </article>
           <article data-reveal>
-            <p class="token-value">1B</p>
+            <p class="token-value" data-count="1000000000" data-format="compact">1B</p>
             <h3>Supply</h3>
             <p>1,000,000,000 $SOLYA</p>
           </article>
           <article data-reveal>
-            <p class="token-value">0%</p>
+            <p class="token-value" data-count="0" data-from="12" data-suffix="%">0%</p>
             <h3>Tax</h3>
             <p>Buy and sell. Nothing taken.</p>
           </article>
@@ -246,7 +258,7 @@
           </li>
         </ol>
         <div class="buy-cta" data-reveal>
-          <a href="https://pump.fun/coin/6v2Xpt3Qd3YRBJ5v68E9eRLYqBDKMc5YYwcTpor7pump" data-pumpfun target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-lg">
+          <a href="https://pump.fun" data-pumpfun target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-lg">
             <svg class="btn-paw"><use href="#paw" /></svg>
             Buy on pump.fun
           </a>
